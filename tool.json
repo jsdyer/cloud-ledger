@@ -32,6 +32,16 @@
           ],
           "unit": "disclosures"
         }
+      },
+      {
+        "label": "Reporting quarters",
+        "url": "https://coolcode.ca/cloud-ledger/data/status.json",
+        "path": [
+          "periodStart"
+        ],
+        "end_path": [
+          "periodEnd"
+        ]
       }
     ]
   }
