@@ -1,16 +1,38 @@
 {
-  "id": "coolcode-tool-template",
-  "title": "CoolCode Tool Starter",
-  "description": "A browser-only example that trims lines and removes exact duplicates.",
-  "category": "security",
-  "tags": ["text", "lines", "duplicates"],
-  "icon": "scan-search",
-  "url": "/coolcode-tool-template/",
-  "source": "https://github.com/jsdyer/coolcode-tool-template",
+  "id": "cloud-ledger",
+  "title": "Cloud Ledger",
+  "description": "Compare federal contract disclosures for selected cloud and IT suppliers by department, reporting quarter and instrument.",
+  "category": "disclosures",
+  "tags": [
+    "cloud",
+    "contracts",
+    "amendments",
+    "procurement",
+    "IT"
+  ],
+  "icon": "database",
+  "url": "/cloud-ledger/",
+  "source": "https://github.com/jsdyer/cloud-ledger",
   "hosting": "project",
   "access": "browser",
   "data_info": {
-    "mode": "local",
-    "detail": "The browser reads the text you paste and compares its lines."
+    "mode": "snapshot",
+    "detail": "Treasury Board contract disclosures preserve filed vendor names and distinguish original awards from amendments.",
+    "cadence": "Weekly",
+    "probes": [
+      {
+        "label": "Data retrieved",
+        "url": "https://coolcode.ca/cloud-ledger/data/status.json",
+        "path": [
+          "retrieved"
+        ],
+        "count_at": {
+          "path": [
+            "count"
+          ],
+          "unit": "disclosures"
+        }
+      }
+    ]
   }
 }

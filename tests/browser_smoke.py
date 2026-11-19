@@ -29,22 +29,22 @@ def main():
                 errors = []
                 page.on("pageerror", lambda error: errors.append(str(error)))
                 page.goto(f"http://127.0.0.1:{server.server_port}/example-tool/")
-                page.locator("#sample").click()
-                assert page.locator("#output").input_value() == "Halifax\nLangley\nVancouver"
-                assert "1 duplicate removed" in page.locator("#status").inner_text()
-                page.locator("#input").fill('<img src=x onerror="alert(1)">\n<img src=x onerror="alert(1)">')
-                assert page.locator("#output").input_value() == '<img src=x onerror="alert(1)">'
-                assert page.locator("img").count() == 0
-                page.locator("#clear").click()
-                assert page.locator("#output").input_value() == ""
-                page.locator("#sample").click()
+                page.wait_for_selector("#rows article")
+                page.select_option("#vendor","ThinkOn")
+                page.fill("#query","C-2026-2027-Q2-00919")
+                page.wait_for_function("document.querySelectorAll('#rows article').length === 1")
+                page.locator("summary").click()
+                assert "$192,894.74" in page.locator("#rows").inner_text()
+                page.fill("#query","")
+                page.select_option("#instrument","A")
+                assert "ThinkOn" in page.locator("#vendor").input_value()
                 page.screenshot(path=str(screenshots / "desktop.png"), full_page=True)
                 page.set_viewport_size({"width": 390, "height": 844})
                 assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
                 page.screenshot(path=str(screenshots / "mobile.png"), full_page=True)
                 assert not errors, errors
                 browser.close()
-            print("Browser checks passed: project subpath, sample, clear, safe text and mobile layout")
+            print("Browser checks passed: published records, interactive filters and mobile layout")
         finally:
             server.shutdown()
 
